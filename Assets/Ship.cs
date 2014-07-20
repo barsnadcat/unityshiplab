@@ -5,6 +5,29 @@ public class Ship : MonoBehaviour
 {
 	public float health;
 	public float shield;
+	public float shieldRegen;
+
+	private float nextRegen;
+	private float shieldMax;
+
+	void Start()
+	{
+		shieldMax = shield;
+	}
+
+	void Update()
+	{
+		if (Time.time > nextRegen)
+		{
+			nextRegen = Time.time + 1;
+			shield += shieldRegen;
+			if (shield > shieldMax)
+			{
+				shield = shieldMax;
+			}
+		}
+	}
+
 	void OnTriggerEnter(Collider other) 
 	{
 		Projectile proj = other.GetComponent<Projectile> ();
