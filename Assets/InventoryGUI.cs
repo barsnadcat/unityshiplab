@@ -18,10 +18,14 @@ public class InventoryGUI : MonoBehaviour
 
 	string GetShipStatus(GameObject ship)
 	{
-		string result = ship.name;
-		result += "<color=blue> Shield: " + ship.GetComponent<Ship>().GetShield() + " </color>";
-		result += "<color=green> Health: " + ship.GetComponent<Ship>().GetHealth() + " </color>";
-		return result;
+		if (ship)
+		{
+			string result = ship.name;
+			result += "<color=blue> Shield: " + ship.GetComponent<Ship>().GetShield() + " </color>";
+			result += "<color=green> Health: " + ship.GetComponent<Ship>().GetHealth() + " </color>";
+			return result;
+		}
+		return "Destroyed";
 	}
 
 	void OnGUI ()
