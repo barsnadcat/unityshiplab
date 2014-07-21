@@ -15,16 +15,6 @@ public class Ship : MonoBehaviour
 	private GameObject[] weapons;
 	private GameObject[] modules;
 
-	void Awake()
-	{
-		weapons = new GameObject[weaponSlots];
-		modules = new GameObject[moduleSlots];
-	}
-
-	void Start()
-	{
-		gameObject.SetActive(false);
-	}
 
 	public void Init()
 	{
@@ -71,6 +61,17 @@ public class Ship : MonoBehaviour
 		GameObject wpn = Instantiate(Resources.Load(name), position, transform.rotation) as GameObject;
 		wpn.transform.parent = transform;
 		weapons [slot] = wpn;
+	}
+
+	void Awake()
+	{
+		weapons = new GameObject[weaponSlots];
+		modules = new GameObject[moduleSlots];
+	}
+	
+	void Start()
+	{
+		gameObject.SetActive(false);
 	}
 
 	void Update()
