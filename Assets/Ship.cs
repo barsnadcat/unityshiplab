@@ -34,18 +34,7 @@ public class Ship : MonoBehaviour
 			weapons[i].GetComponent<Weapon>().rate *= fireRateMult;
 		}
 	}
-
-
-	public float GetShield()
-	{
-		return shield;
-	}
-
-	public float GetHealth()
-	{
-		return health;
-	}
-
+	
 	public void SetModule(int slot, string name)
 	{
 		Destroy (modules [slot]);

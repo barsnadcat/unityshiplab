@@ -31,8 +31,8 @@ public class Game : MonoBehaviour
 		if (ship)
 		{
 			string result = ship.name;
-			result += "<color=blue> Shield: " + ship.GetComponent<Ship>().GetShield() + " </color>";
-			result += "<color=green> Health: " + ship.GetComponent<Ship>().GetHealth() + " </color>";
+			result += "<color=blue> Shield: " + ship.GetComponent<Ship>().shield + " </color>";
+			result += "<color=green> Health: " + ship.GetComponent<Ship>().health + " </color>";
 			return result;
 		}
 		return "Destroyed";
