@@ -6,14 +6,18 @@ public class InventoryGUI : MonoBehaviour
 	public GameObject shipA;
 	public GameObject shipB;
 
+	private int[] shipAweapons;
+	private int[] shipBweapons;
+
+	private string[] toolbarStrings = {"WeaponA", "WeaponB", "WeaponC"};
+
+
 	private bool inGame;
 	void Start()
 	{
 		inGame = false;
-		shipA.GetComponent<Ship>().SetWeapon(0, "WeaponA");
-		shipA.GetComponent<Ship>().SetWeapon(1, "WeaponC");
-		shipB.GetComponent<Ship>().SetWeapon(0, "WeaponB");
-		shipB.GetComponent<Ship>().SetWeapon(1, "WeaponB");
+		shipAweapons = new int[shipA.GetComponent<Ship>().weaponSlots];
+		shipBweapons = new int[shipB.GetComponent<Ship>().weaponSlots];
 	}
 
 	string GetShipStatus(GameObject ship)
@@ -28,16 +32,40 @@ public class InventoryGUI : MonoBehaviour
 		return "Destroyed";
 	}
 
+	void ShipWeaponsGUI(int[] shipWeapons, int row)
+	{
+		int spacing = 50;
+		for(int i = 0; i < shipWeapons.Length; ++i)
+		{
+			shipWeapons[i] = GUI.Toolbar (new Rect (10, row, 600, 30), shipWeapons[i], toolbarStrings);
+			row += spacing;
+		}
+	}
+
+	void EquipShip(GameObject ship, int[] shipWeapons)
+	{
+		Ship s = ship.GetComponent<Ship> ();
+		for(int i = 0; i < shipWeapons.Length; ++i)
+		{
+			s.SetWeapon(i, toolbarStrings[shipWeapons[i]]);
+		}
+	}
+
 	void OnGUI ()
 	{
 		if (!inGame)
 		{
 			if (GUI.Button (new Rect (10, 10, 150, 30), "Start"))
 			{
-				shipA.SetActive(true);
+				EquipShip(shipA, shipAweapons);
+				EquipShip(shipB, shipBweapons);
 				shipB.SetActive(true);
+				shipA.SetActive(true);
 				inGame = !inGame;
 			}
+
+			ShipWeaponsGUI(shipAweapons, 100);
+			ShipWeaponsGUI(shipBweapons, 300);
 		}
 		else
 		{
