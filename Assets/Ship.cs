@@ -6,22 +6,47 @@ public class Ship : MonoBehaviour
 	public float health;
 	public float shield;
 	public float shieldRegen;
+
 	public int weaponSlots;
 	public int moduleSlots;
 	
 	private float nextRegen;
 	private float shieldMax;
+	public float fireRateMult;
 	private GameObject[] weapons;
+	private GameObject[] modules;
 
 	void Awake()
 	{
-		shieldMax = shield;
 		weapons = new GameObject[weaponSlots];
+		modules = new GameObject[moduleSlots];
 	}
 
 	void Start()
 	{
 		gameObject.SetActive(false);
+	}
+
+	void OnEnabled()
+	{
+		shieldMax = shield;
+		for(int i = 0; i < weapons.Length; ++i)
+		{
+			weapons[i].GetComponent<Weapon>().rate *= fireRateMult;
+		}
+	}
+
+	void UpdateStats()
+	{
+		fireRateMult = 1;
+		for (int i = 0; i < modules.Length; ++i) 
+		{
+			Module m = modules[i].GetComponent<Module>();
+			shield += m.shield;
+			health += m.health;
+			shieldRegen *= m.shieldRegen;
+			fireRateMult *= m.fireRate;
+		}
 	}
 
 	public float GetShield()
@@ -32,6 +57,14 @@ public class Ship : MonoBehaviour
 	public float GetHealth()
 	{
 		return health;
+	}
+
+	public void SetModule(int slot, string name)
+	{
+		Destroy (modules [slot]);
+		GameObject module = Instantiate(Resources.Load(name), transform.position, transform.rotation) as GameObject;
+		module.transform.parent = transform;
+		modules [slot] = module;
 	}
 
 	public void SetWeapon(int slot, string name)

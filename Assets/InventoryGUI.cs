@@ -49,12 +49,17 @@ public class InventoryGUI : MonoBehaviour
 		}
 	}
 
-	void EquipShip(GameObject ship, int[] shipWeapons)
+	void EquipShip(GameObject ship, int[] shipWeapons, int[] shipModules)
 	{
 		Ship s = ship.GetComponent<Ship> ();
 		for(int i = 0; i < shipWeapons.Length; ++i)
 		{
 			s.SetWeapon(i, weaponStrings[shipWeapons[i]]);
+		}
+
+		for(int i = 0; i < shipModules.Length; ++i)
+		{
+			s.SetModule(i, moduleStrings[shipModules[i]]);
 		}
 	}
 
@@ -64,8 +69,8 @@ public class InventoryGUI : MonoBehaviour
 		{
 			if (GUI.Button (new Rect (10, 10, 150, 30), "Start"))
 			{
-				EquipShip(shipA, shipAweapons);
-				EquipShip(shipB, shipBweapons);
+				EquipShip(shipA, shipAweapons, shipAmodules);
+				EquipShip(shipB, shipBweapons, shipBmodules);
 				shipB.SetActive(true);
 				shipA.SetActive(true);
 				inGame = !inGame;
