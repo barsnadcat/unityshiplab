@@ -63,14 +63,10 @@ public class Ship : MonoBehaviour
 		weapons [slot] = wpn;
 	}
 
-	void Awake()
+	void Start()
 	{
 		weapons = new GameObject[weaponSlots];
 		modules = new GameObject[moduleSlots];
-	}
-	
-	void Start()
-	{
 		gameObject.SetActive(false);
 	}
 

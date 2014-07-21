@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InventoryGUI : MonoBehaviour
+public class Game : MonoBehaviour
 {
 	public GameObject shipA;
 	public GameObject shipB;
@@ -21,8 +21,8 @@ public class InventoryGUI : MonoBehaviour
 	{
 		inGame = false;
 		shipAweapons = new int[shipA.GetComponent<Ship>().weaponSlots];
-		shipBweapons = new int[shipB.GetComponent<Ship>().weaponSlots];
 		shipAmodules = new int[shipA.GetComponent<Ship>().moduleSlots];
+		shipBweapons = new int[shipB.GetComponent<Ship>().weaponSlots];
 		shipBmodules = new int[shipB.GetComponent<Ship>().moduleSlots];
 	}
 
