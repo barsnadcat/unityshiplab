@@ -21,7 +21,8 @@ public class Ship : MonoBehaviour
 	public void SetWeapon(int slot, string name)
 	{
 		Destroy (weapons [slot]);
-		GameObject wpn = Instantiate(Resources.Load(name), transform.position + transform.forward * 2, transform.rotation) as GameObject;
+		Vector3 position = transform.position + transform.forward * 2 + transform.right * (0.5f - slot);
+		GameObject wpn = Instantiate(Resources.Load(name), position, transform.rotation) as GameObject;
 		wpn.transform.parent = transform;
 		weapons [slot] = wpn;
 	}
