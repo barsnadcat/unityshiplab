@@ -8,7 +8,9 @@ public class InventoryGUI : MonoBehaviour
 	void Start()
 	{
 		shipA.GetComponent<Ship>().SetWeapon(0, "WeaponA");
+		shipA.GetComponent<Ship>().SetWeapon(1, "WeaponC");
 		shipB.GetComponent<Ship>().SetWeapon(0, "WeaponB");
+		shipB.GetComponent<Ship>().SetWeapon(1, "WeaponB");
 	}
 
 	void OnGUI ()
