@@ -12,7 +12,6 @@ public class Ship : MonoBehaviour
 	
 	private float nextRegen;
 	private float shieldMax;
-	public float fireRateMult;
 	private GameObject[] weapons;
 	private GameObject[] modules;
 
@@ -27,18 +26,9 @@ public class Ship : MonoBehaviour
 		gameObject.SetActive(false);
 	}
 
-	void OnEnabled()
+	public void Init()
 	{
-		shieldMax = shield;
-		for(int i = 0; i < weapons.Length; ++i)
-		{
-			weapons[i].GetComponent<Weapon>().rate *= fireRateMult;
-		}
-	}
-
-	void UpdateStats()
-	{
-		fireRateMult = 1;
+		float fireRateMult = 1.0f;
 		for (int i = 0; i < modules.Length; ++i) 
 		{
 			Module m = modules[i].GetComponent<Module>();
@@ -47,7 +37,14 @@ public class Ship : MonoBehaviour
 			shieldRegen *= m.shieldRegen;
 			fireRateMult *= m.fireRate;
 		}
+
+		shieldMax = shield;
+		for(int i = 0; i < weapons.Length; ++i)
+		{
+			weapons[i].GetComponent<Weapon>().rate *= fireRateMult;
+		}
 	}
+
 
 	public float GetShield()
 	{

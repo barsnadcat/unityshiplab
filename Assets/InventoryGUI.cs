@@ -61,6 +61,7 @@ public class InventoryGUI : MonoBehaviour
 		{
 			s.SetModule(i, moduleStrings[shipModules[i]]);
 		}
+		s.Init ();
 	}
 
 	void OnGUI ()
