@@ -17,7 +17,22 @@ public class Ship : MonoBehaviour
 		shieldMax = shield;
 		weapons = new GameObject[weaponSlots];
 	}
-	
+
+	void Start()
+	{
+		gameObject.SetActive(false);
+	}
+
+	public float GetShield()
+	{
+		return shield;
+	}
+
+	public float GetHealth()
+	{
+		return health;
+	}
+
 	public void SetWeapon(int slot, string name)
 	{
 		Destroy (weapons [slot]);
