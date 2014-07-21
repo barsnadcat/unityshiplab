@@ -6,13 +6,24 @@ public class Ship : MonoBehaviour
 	public float health;
 	public float shield;
 	public float shieldRegen;
+	public int weaponSlots;
 	
 	private float nextRegen;
 	private float shieldMax;
+	private GameObject[] weapons;
 
-	void Start()
+	void Awake()
 	{
 		shieldMax = shield;
+		weapons = new GameObject[weaponSlots];
+	}
+	
+	public void SetWeapon(int slot, string name)
+	{
+		Destroy (weapons [slot]);
+		GameObject wpn = Instantiate(Resources.Load(name), transform.position + transform.forward * 2, transform.rotation) as GameObject;
+		wpn.transform.parent = transform;
+		weapons [slot] = wpn;
 	}
 
 	void Update()
