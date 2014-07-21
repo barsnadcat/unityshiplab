@@ -7,6 +7,7 @@ public class Ship : MonoBehaviour
 	public float shield;
 	public float shieldRegen;
 	public int weaponSlots;
+	public int moduleSlots;
 	
 	private float nextRegen;
 	private float shieldMax;

@@ -8,8 +8,12 @@ public class InventoryGUI : MonoBehaviour
 
 	private int[] shipAweapons;
 	private int[] shipBweapons;
+	private int[] shipAmodules;
+	private int[] shipBmodules;
 
-	private string[] toolbarStrings = {"WeaponA", "WeaponB", "WeaponC"};
+
+	private string[] weaponStrings = {"WeaponA", "WeaponB", "WeaponC"};
+	private string[] moduleStrings = {"ModuleA", "ModuleB", "ModuleC", "ModuleD"};
 
 
 	private bool inGame;
@@ -18,6 +22,8 @@ public class InventoryGUI : MonoBehaviour
 		inGame = false;
 		shipAweapons = new int[shipA.GetComponent<Ship>().weaponSlots];
 		shipBweapons = new int[shipB.GetComponent<Ship>().weaponSlots];
+		shipAmodules = new int[shipA.GetComponent<Ship>().moduleSlots];
+		shipBmodules = new int[shipB.GetComponent<Ship>().moduleSlots];
 	}
 
 	string GetShipStatus(GameObject ship)
@@ -31,13 +37,14 @@ public class InventoryGUI : MonoBehaviour
 		}
 		return "Destroyed";
 	}
+	
 
-	void ShipWeaponsGUI(int[] shipWeapons, int row)
+	void ShipInventoryGUI(int[] inv, int colum, int row, string[] strings)
 	{
-		int spacing = 50;
-		for(int i = 0; i < shipWeapons.Length; ++i)
+		int spacing = 25;
+		for(int i = 0; i < inv.Length; ++i)
 		{
-			shipWeapons[i] = GUI.Toolbar (new Rect (10, row, 600, 30), shipWeapons[i], toolbarStrings);
+			inv[i] = GUI.Toolbar (new Rect (colum, row, 300, 20), inv[i], strings);
 			row += spacing;
 		}
 	}
@@ -47,7 +54,7 @@ public class InventoryGUI : MonoBehaviour
 		Ship s = ship.GetComponent<Ship> ();
 		for(int i = 0; i < shipWeapons.Length; ++i)
 		{
-			s.SetWeapon(i, toolbarStrings[shipWeapons[i]]);
+			s.SetWeapon(i, weaponStrings[shipWeapons[i]]);
 		}
 	}
 
@@ -63,9 +70,13 @@ public class InventoryGUI : MonoBehaviour
 				shipA.SetActive(true);
 				inGame = !inGame;
 			}
+			GUI.Box (new Rect (0,80,320,320), "Ship A");
+			ShipInventoryGUI(shipAweapons, 10, 100, weaponStrings);
+			ShipInventoryGUI(shipAmodules, 10, 200, moduleStrings);
 
-			ShipWeaponsGUI(shipAweapons, 100);
-			ShipWeaponsGUI(shipBweapons, 300);
+			GUI.Box (new Rect (390,80,320,320), "Ship B");
+			ShipInventoryGUI(shipBweapons, 400, 100, weaponStrings);
+			ShipInventoryGUI(shipBmodules, 400, 200, moduleStrings);
 		}
 		else
 		{
