@@ -13,8 +13,6 @@ public class Ship : MonoBehaviour
 	void Start()
 	{
 		shieldMax = shield;
-		Weapon wpn = gameObject.AddComponent<Weapon> ();
-		wpn.Setup (10, 2, 10, 2);
 	}
 
 	void Update()
